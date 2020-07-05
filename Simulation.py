@@ -188,19 +188,19 @@ def saveHoldingBayResults(timePeriod,workbook, params):
 def printOutputStatistics(timePeriod, procedures, params):
     print ("\n...Done!")
     
-    print "\n*********PARAMETERS*********"
-    print "Procedure Sorting Priority: " + str(params.wSortPriority.value)
-    print "\tsortProcs: " + str(params.sortProcs)
-    print "\tsortIndex: " + str(params.sortIndex)
-    print "\tsortDescend: " + str(params.sortDescend)
-    print "Scenario: " + str(params.wFiles.value)
-    print "\tprocDataFile: " + str(params.procDataFile)
-    print "\tshiftDataFile: " + str(params.shiftDataFile)
-    print "Mean HB Cleaning Time (hours): " + str(params.desiredPreCleanMean)
-    print "Resolution (minutes): " + str(params.resolution)
+    print ("\n*********PARAMETERS*********")
+    print ("Procedure Sorting Priority: " + str(params.wSortPriority.value))
+    print ("\tsortProcs: " + str(params.sortProcs))
+    print ("\tsortIndex: " + str(params.sortIndex))
+    print ("\tsortDescend: " + str(params.sortDescend))
+    print ("Scenario: " + str(params.wFiles.value))
+    print ("\tprocDataFile: " + str(params.procDataFile))
+    print ("\tshiftDataFile: " + str(params.shiftDataFile))
+    print ("Mean HB Cleaning Time (hours): " + str(params.desiredPreCleanMean))
+    print ("Resolution (minutes): " + str(params.resolution))
     
-    print "Cath rooms: "+str(params.numCathRooms)
-    print "EP rooms: "+str(params.numEPRooms)
+    print ("Cath rooms: "+str(params.numCathRooms))
+    print ("EP rooms: "+str(params.numEPRooms))
 ##    print "Cath rooms used for non-emergencies: "+str(numRestrictedCath)
 ##    print "EP rooms used for non-emergencies: "+str(numRestrictedEP)
 ##    print "Crossover policy: "+str(crossoverType)
@@ -208,74 +208,74 @@ def printOutputStatistics(timePeriod, procedures, params):
 ##    print "Pair days for scheduling? "+str(dayPairs)
 ##    print "Schedule all procedures on same day as historically? "+str(sameDaysOnly)
 ##    print "Placement priority: "+str(priority)
-    print "Post procedure determination random? "+str(params.postProcRandom)
-    print "Pre procedure time converted to hours? "+str(params.ConvertPreProcToHours)
-    print "Change provider days? "+str(params.ChangeProviderDays)
-    print "Swap provider days? "+str(params.SwapProviderDays)   
-    print "Pre procedure cap implemented? "+str(params.CapHBPreProc)
+    print ("Post procedure determination random? "+str(params.postProcRandom))
+    print ("Pre procedure time converted to hours? "+str(params.ConvertPreProcToHours))
+    print ("Change provider days? "+str(params.ChangeProviderDays))
+    print ("Swap provider days? "+str(params.SwapProviderDays))
+    print ("Pre procedure cap implemented? "+str(params.CapHBPreProc))
 
-    print "\n*********PROCEDURE DATA*********"
-    print "Total procedures: "+str(timePeriod.numTotalProcs)
-    print "Same days: "+str(timePeriod.numSameDays)
-    print "Same weeks: "+str(timePeriod.numSameWeeks)
-    print "Emergencies: "+str(timePeriod.numEmergencies)
+    print ("\n*********PROCEDURE DATA*********")
+    print ("Total procedures: "+str(timePeriod.numTotalProcs))
+    print ("Same days: "+str(timePeriod.numSameDays))
+    print ("Same weeks: "+str(timePeriod.numSameWeeks))
+    print ("Emergencies: "+str(timePeriod.numEmergencies))
     minutes = timePeriod.getProcsByMinuteVolume(procedures, params)
     for x in xrange(6):
         minutes[x] = round(minutes[x],2)
-    print "\tBREAKDOWN BY MINUTES"
-    print "\tSame week flex: "+str(minutes[4])+" minutes"
-    print "\tSame week inflex: "+str(minutes[5])+" minutes"
-    print "\tSame day flex: "+str(minutes[2])+" minutes"
-    print "\tSame day inflex: "+str(minutes[3])+" minutes"
-    print "\tEmergency flex: "+str(minutes[0])+" minutes"
-    print "\tEmergency inflex: "+str(minutes[1])+" minutes"
+    print ("\tBREAKDOWN BY MINUTES")
+    print ("\tSame week flex: "+str(minutes[4])+" minutes")
+    print ("\tSame week inflex: "+str(minutes[5])+" minutes")
+    print ("\tSame day flex: "+str(minutes[2])+" minutes")
+    print ("\tSame day inflex: "+str(minutes[3])+" minutes")
+    print ("\tEmergency flex: "+str(minutes[0])+" minutes")
+    print ("\tEmergency inflex: "+str(minutes[1])+" minutes")
 
     
-    print "\n*********OVERFLOW STATS*********"
-    print "Total of "+str(timePeriod.procsPlaced)+" procedures placed"
-    print "Total procedures scheduled past closing time: "+str(timePeriod.overflowCath+timePeriod.overflowEP)
-    print "\tCath overflow: "+str(timePeriod.overflowCath)
-    print "\tEP overflow: "+str(timePeriod.overflowEP)
-    print "\t---"
-    print "\tQuarter day shift overflows: "+str(timePeriod.overflowQuarter)
-    print "\tHalf day shift overflows: "+str(timePeriod.overflowHalf)
-    print "\tFull day shift overflows: "+str(timePeriod.overflowFull)
-    print "Same day/emergencies overflow during days (0 index): "+str(sorted(timePeriod.overflowDays))
-    minutesPlaced = timePeriod.getProcsByMinuteVolume(timePeriod.procsPlacedData, params)
-##    print "\tBREAKDOWN BY MINUTES PLACED"
+    print ("\n*********OVERFLOW STATS*********")
+    print ("Total of "+str(timePeriod.procsPlaced)+" procedures placed")
+    print ("Total procedures scheduled past closing time: "+str(timePeriod.overflowCath+timePeriod.overflowEP))
+    print ("\tCath overflow: "+str(timePeriod.overflowCath))
+    print ("\tEP overflow: "+str(timePeriod.overflowEP))
+    print ("\t---")
+    print ("\tQuarter day shift overflows: "+str(timePeriod.overflowQuarter))
+    print ("\tHalf day shift overflows: "+str(timePeriod.overflowHalf))
+    print ("\tFull day shift overflows: "+str(timePeriod.overflowFull))
+    print ("Same day/emergencies overflow during days (0 index): "+str(sorted(timePeriod.overflowDays))
+    minutesPlaced = timePeriod.getProcsByMinuteVolume(timePeriod.procsPlacedData, params))
+##    print ("\tBREAKDOWN BY MINUTES PLACED")
 ##    modifiedMinutes = [0]*6
 ##    for x in xrange(6):
 ##        minutesPlaced[x] = round(minutesPlaced[x],2)
 ##        modifiedMinutes[x] = 100 if minutes[x]==0 else minutes[x]
-##    print "\tSame week flex: "+str(minutesPlaced[4])+" out of "+str(minutes[4])+" minutes placed ("+str(round((minutesPlaced[4]/(modifiedMinutes[4])*100),2))+"%)"
-##    print "\tSame week inflex: "+str(minutesPlaced[5])+" out of "+str(minutes[5])+" minutes placed ("+str(round((minutesPlaced[5]/(modifiedMinutes[5])*100),2))+"%)"
-##    print "\tSame day flex: "+str(minutesPlaced[2])+" out of "+str(minutes[2])+" minutes placed ("+str(round((minutesPlaced[2]/(modifiedMinutes[2])*100),2))+"%)"
-##    print "\tSame day inflex: "+str(minutesPlaced[3])+" out of "+str(minutes[3])+" minutes placed ("+str(round((minutesPlaced[3]/(modifiedMinutes[3])*100),2))+"%)"
-##    print "\tEmergency flex: "+str(minutesPlaced[0])+" out of "+str(minutes[0])+" minutes placed ("+str(round((minutesPlaced[0]/(modifiedMinutes[0])*100),2))+"%)"
-##    print "\tEmergency inflex: "+str(minutesPlaced[1])+" out of "+str(minutes[1])+" minutes placed ("+str(round((minutesPlaced[1]/(modifiedMinutes[1])*100),2))+"%)"+"\n"
+##    print ("\tSame week flex: "+str(minutesPlaced[4])+" out of "+str(minutes[4])+" minutes placed ("+str(round((minutesPlaced[4]/(modifiedMinutes[4])*100),2))+"%)")
+##    print ("\tSame week inflex: "+str(minutesPlaced[5])+" out of "+str(minutes[5])+" minutes placed ("+str(round((minutesPlaced[5]/(modifiedMinutes[5])*100),2))+"%)")
+##    print ("\tSame day flex: "+str(minutesPlaced[2])+" out of "+str(minutes[2])+" minutes placed ("+str(round((minutesPlaced[2]/(modifiedMinutes[2])*100),2))+"%)")
+##    print ("\tSame day inflex: "+str(minutesPlaced[3])+" out of "+str(minutes[3])+" minutes placed ("+str(round((minutesPlaced[3]/(modifiedMinutes[3])*100),2))+"%)")
+##    print ("\tEmergency flex: "+str(minutesPlaced[0])+" out of "+str(minutes[0])+" minutes placed ("+str(round((minutesPlaced[0]/(modifiedMinutes[0])*100),2))+"%)")
+##    print ("\tEmergency inflex: "+str(minutesPlaced[1])+" out of "+str(minutes[1])+" minutes placed ("+str(round((minutesPlaced[1]/(modifiedMinutes[1])*100),2))+"%)"+"\n")
     
-    print "\n*********CROSSOVER STATS*********"
-    print "Total number of crossover procedures: "+str(timePeriod.crossOverProcs)
-    print "Total number of Cath procedures in EP: "+str(timePeriod.cathToEP)
-    print "Total number of EP procedures in Cath: "+str(timePeriod.epToCath)
+    print ("\n*********CROSSOVER STATS*********"
+    print ("Total number of crossover procedures: "+str(timePeriod.crossOverProcs))
+    print ("Total number of Cath procedures in EP: "+str(timePeriod.cathToEP))
+    print ("Total number of EP procedures in Cath: "+str(timePeriod.epToCath))
     
-    print "\n*********UTILIZATION STATS*********"
-    cath, ep, avgUtilDay, avgUtilWeek, util = timePeriod.getUtilizationStatistics(params)
-    print "Average utilization in Cath over time period: "+str(cath)
-    print "Average utilization in EP over time period: "+str(ep)
-    print "\nType: 'avgUtilDay[_day_]' to view average utilization in Cath and EP on a given day (indexed from 0)"
-    print "Type: 'avgUtilWeek[_week_]' to view average utilization in Cath and EP during a given week (indexed from 0)"
-    print "Type: 'printSchedule(_day_,_labID_,_room_)' to see a specific room day schedule (indexed from 0)"
+    print ("\n*********UTILIZATION STATS*********"
+    cath, ep, avgUtilDay, avgUtilWeek, util = timePeriod.getUtilizationStatistics(params))
+    print ("Average utilization in Cath over time period: "+str(cath))
+    print ("Average utilization in EP over time period: "+str(ep))
+    print ("\nType: 'avgUtilDay[_day_]' to view average utilization in Cath and EP on a given day (indexed from 0)")
+    print ("Type: 'avgUtilWeek[_week_]' to view average utilization in Cath and EP during a given week (indexed from 0)")
+    print ("Type: 'printSchedule(_day_,_labID_,_room_)' to see a specific room day schedule (indexed from 0)")
 
     return avgUtilDay,avgUtilWeek
 
 def printSchedule(day,lab,room):
     rooms = timePeriod.bins[0]
-    print "Day: "+str(day)+" Lab: "+str(lab)+" Room: "+str(room)
+    print ("Day: "+str(day)+" Lab: "+str(lab)+" Room: "+str(room))
     if lab != middleID:
         shifts = timePeriod.bins[3]
         daysShifts = shifts[day].rooms[(lab,room)]
-        print "Day's Shifts: "+str(daysShifts)
+        print ("Day's Shifts: "+str(daysShifts))
     s = rooms[(day,lab,room)]
     times = s.timeSlots.keys()
     times.sort(key=lambda x:(x[0],x[1]))
@@ -287,11 +287,11 @@ def printSchedule(day,lab,room):
                 procID = s.timeSlots[t][0][10]
                 if procID not in seen:
                     seen.add(procID)
-                    print str(t)+": "+str(s.timeSlots[t][0])
+                    print (str(t)+": "+str(s.timeSlots[t][0]))
                 else:
-                    print str(t)+": *"                       
+                    print (str(t)+": *")                     
             else:
-                print str(t)+": "
+                print (str(t)+": ")
 
 
 
