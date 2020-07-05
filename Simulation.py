@@ -186,7 +186,7 @@ def saveHoldingBayResults(timePeriod,workbook, params):
     writer.writerows(data)
 
 def printOutputStatistics(timePeriod, procedures, params):
-    print "\n...Done!"
+    print ("\n...Done!")
     
     print "\n*********PARAMETERS*********"
     print "Procedure Sorting Priority: " + str(params.wSortPriority.value)
