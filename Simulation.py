@@ -22,7 +22,8 @@ from TimePeriod import *
 
 
 #set directory
-os.chdir("/home/matrix/")
+#os.chdir("/home/matrix/")
+os.chdir("/content/test-epcath/")
 
 
 
@@ -240,7 +241,7 @@ def printOutputStatistics(timePeriod, procedures, params):
     print ("\tQuarter day shift overflows: "+str(timePeriod.overflowQuarter))
     print ("\tHalf day shift overflows: "+str(timePeriod.overflowHalf))
     print ("\tFull day shift overflows: "+str(timePeriod.overflowFull))
-    print ("Same day/emergencies overflow during days (0 index): "+str(sorted(timePeriod.overflowDays))
+    print ("Same day/emergencies overflow during days (0 index): "+str(sorted(timePeriod.overflowDays)))
     minutesPlaced = timePeriod.getProcsByMinuteVolume(timePeriod.procsPlacedData, params)
 ##    print ("\tBREAKDOWN BY MINUTES PLACED")
 ##    modifiedMinutes = [0]*6
@@ -254,13 +255,13 @@ def printOutputStatistics(timePeriod, procedures, params):
 ##    print ("\tEmergency flex: "+str(minutesPlaced[0])+" out of "+str(minutes[0])+" minutes placed ("+str(round((minutesPlaced[0]/(modifiedMinutes[0])*100),2))+"%)")
 ##    print ("\tEmergency inflex: "+str(minutesPlaced[1])+" out of "+str(minutes[1])+" minutes placed ("+str(round((minutesPlaced[1]/(modifiedMinutes[1])*100),2))+"%)"+"\n")
     
-    print ("\n*********CROSSOVER STATS*********"
+    print ("\n*********CROSSOVER STATS*********")
     print ("Total number of crossover procedures: "+str(timePeriod.crossOverProcs))
     print ("Total number of Cath procedures in EP: "+str(timePeriod.cathToEP))
     print ("Total number of EP procedures in Cath: "+str(timePeriod.epToCath))
     
-    print ("\n*********UTILIZATION STATS*********"
-    cath, ep, avgUtilDay, avgUtilWeek, util = timePeriod.getUtilizationStatistics(params))
+    print ("\n*********UTILIZATION STATS*********")
+    cath, ep, avgUtilDay, avgUtilWeek, util = timePeriod.getUtilizationStatistics(params)
     print ("Average utilization in Cath over time period: "+str(cath))
     print ("Average utilization in EP over time period: "+str(ep))
     print ("\nType: 'avgUtilDay[_day_]' to view average utilization in Cath and EP on a given day (indexed from 0)")
