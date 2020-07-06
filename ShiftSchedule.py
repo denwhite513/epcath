@@ -44,7 +44,8 @@ class ShiftSchedule():
         
         cathStarts = {(cathID,room):labStartTime for room in range(numCathRooms)}
         epStarts = {(epID,room):labStartTime for room in range(numEPRooms)}
-        self.nextShiftStartTimes = dict(cathStarts.items()+epStarts.items())
+        #self.nextShiftStartTimes = dict(cathStarts.items()+epStarts.items())
+        self.nextShiftStartTimes = dict(list(cathStarts.items())+list(epStarts.items()))
 
     def findEarliestRoom(self,lab):
         '''
