@@ -254,7 +254,7 @@ def printOutputStatistics(timePeriod, procedures, params):
 ##    print ("\tEmergency flex: "+str(minutesPlaced[0])+" out of "+str(minutes[0])+" minutes placed ("+str(round((minutesPlaced[0]/(modifiedMinutes[0])*100),2))+"%)")
 ##    print ("\tEmergency inflex: "+str(minutesPlaced[1])+" out of "+str(minutes[1])+" minutes placed ("+str(round((minutesPlaced[1]/(modifiedMinutes[1])*100),2))+"%)"+"\n")
     
-    print ("\n*********CROSSOVER STATS*********"
+    print ("\n*********CROSSOVER STATS*********")
     print ("Total number of crossover procedures: "+str(timePeriod.crossOverProcs))
     print ("Total number of Cath procedures in EP: "+str(timePeriod.cathToEP))
     print ("Total number of EP procedures in Cath: "+str(timePeriod.epToCath))
