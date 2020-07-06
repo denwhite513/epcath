@@ -22,7 +22,8 @@ from TimePeriod import *
 
 
 #set directory
-os.chdir("/home/matrix/")
+#os.chdir("/home/matrix/")
+os.chdir("/content/test-epcath/")
 
 
 
@@ -259,8 +260,8 @@ def printOutputStatistics(timePeriod, procedures, params):
     print ("Total number of Cath procedures in EP: "+str(timePeriod.cathToEP))
     print ("Total number of EP procedures in Cath: "+str(timePeriod.epToCath))
     
-    print ("\n*********UTILIZATION STATS*********"
-    cath, ep, avgUtilDay, avgUtilWeek, util = timePeriod.getUtilizationStatistics(params))
+    print ("\n*********UTILIZATION STATS*********")
+    cath, ep, avgUtilDay, avgUtilWeek, util = timePeriod.getUtilizationStatistics(params)
     print ("Average utilization in Cath over time period: "+str(cath))
     print ("Average utilization in EP over time period: "+str(ep))
     print ("\nType: 'avgUtilDay[_day_]' to view average utilization in Cath and EP on a given day (indexed from 0)")
