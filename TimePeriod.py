@@ -13,7 +13,7 @@ class TimePeriod:
     '''
     def __init__(self, params):
         
-        CathRooms = {(d,params.cathID,i):Schedule(int(params.resolution),params.labStartTime,params.labEndTime) for i in xrange(params.numCathRooms) for d in xrange(params.daysInPeriod)}
+        CathRooms = {(d,params.cathID,i):Schedule(int(params.resolution),params.labStartTime,params.labEndTime) for i in range(params.numCathRooms) for d in range(params.daysInPeriod)}
         EPRooms = {(d,params.epID,i):Schedule(int(params.resolution),params.labStartTime,params.labEndTime) for i in xrange(params.numEPRooms) for d in xrange(params.daysInPeriod)}
         MiddleRooms = {(d,params.middleID,i):Schedule(int(params.resolution),params.labStartTime,params.labEndTime) for i in xrange(params.numMiddleRooms) for d in xrange(params.daysInPeriod)}
         DayShifts = {d: ShiftSchedule(params.numCathRooms,params.numEPRooms,params.secondShiftStart) for d in xrange(params.daysInPeriod)}
