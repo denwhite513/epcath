@@ -240,7 +240,7 @@ def printOutputStatistics(timePeriod, procedures, params):
     print ("\tQuarter day shift overflows: "+str(timePeriod.overflowQuarter))
     print ("\tHalf day shift overflows: "+str(timePeriod.overflowHalf))
     print ("\tFull day shift overflows: "+str(timePeriod.overflowFull))
-    print ("Same day/emergencies overflow during days (0 index): "+str(sorted(timePeriod.overflowDays))
+    print ("Same day/emergencies overflow during days (0 index): "+str(sorted(timePeriod.overflowDays)))
     minutesPlaced = timePeriod.getProcsByMinuteVolume(timePeriod.procsPlacedData, params)
 ##    print ("\tBREAKDOWN BY MINUTES PLACED")
 ##    modifiedMinutes = [0]*6
