@@ -35,7 +35,8 @@ class ShiftSchedule():
     def __init__(self,numCathRooms,numEPRooms,secondShiftStart):
         cathRooms = {(cathID,room):[] for room in range(numCathRooms)}
         epRooms = {(epID,room):[] for room in range(numEPRooms)}
-        self.rooms = dict(cathRooms.items()+epRooms.items())
+        #self.rooms = dict(cathRooms.items()+epRooms.items())
+        self.rooms = dict(list(cathRooms.items())+list(epRooms.items()))
         self.numCathRooms = numCathRooms
         self.numEPRooms = numEPRooms
         self.numRooms = {cathID: numCathRooms, epID:numEPRooms}
