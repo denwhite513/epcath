@@ -1,6 +1,6 @@
 #Params Class
 '''
-Last Modified: 10/10/19
+Last Modified: 7/5/2020
 Description: Params Class to set and get parameters from user via Widgets (GUI)
 
 @author: cindiewu
@@ -201,7 +201,8 @@ class Params():
         # UNCOMMENT the working directory, or add a new one
         #os.chdir("/Users/nicseo/Desktop/MIT/Junior/Fall/UROP/Scheduling Optimization/Script")
         #os.chdir("/Users/dscheinker/Documents/EP_CATH/Simulation_Model_and_Data/")
-        os.chdir("/home/matrix/")
+        #os.chdir("/home/matrix/")
+        os.chdir("/content/test-epcath/")
 
         # UNCOMMENT both the PROCEDURE data set and the corresponding SHiFT data set 
         # or add a new pair
