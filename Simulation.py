@@ -1,7 +1,7 @@
 '''
 Adapted from @nicseo code 11/20/14
 
-Last Modified: 10/10/19
+Last Modified: 7/5/2020
 
 @author: cindiewu
 '''
@@ -95,7 +95,7 @@ def saveSchedulingResults(timePeriod,workbook,readable):
         columns.append('Shifts')
     else:
         columns = ['Day','Lab','Room']
-        for i in xrange(1,maxShifts+1):
+        for i in range(1,maxShifts+1):
             shift = 'Shift '+str(i)
             columns += [shift+' Start', shift+' ProviderKey', shift+' Type', shift+' Original Lab', shift+' Original Start', shift+' Original AM/PM']
     for time in times:
@@ -106,14 +106,14 @@ def saveSchedulingResults(timePeriod,workbook,readable):
     data = []
     ###################################################################################################################
     def generateRowData(day,numRooms,labName,labID):
-        for room in xrange(numRooms):
+        for room in range(numRooms):
             dayInfo = [str(d),labName,room]
             # extract shift info
             shifts = roomShifts[day-1].rooms[(labID,room)]
             if readable:
                 dayInfo.append(["Start: "+str(x[3])+", Prov: "+str(int(x[0]))+", Shift: "+str(x[1]) for x in shifts])
             else:
-                for i in xrange(maxShifts):
+                for i in range(maxShifts):
                     try:
                         shift = shifts[i]
                         dayInfo += [minutesFromTimeFormatted(shift[3])/60.0,int(shift[0]),shift[1],shift[4],'-','-']
@@ -136,7 +136,7 @@ def saveSchedulingResults(timePeriod,workbook,readable):
                         dayInfo.append(proc[ID])
             data.append(dayInfo)
     ###################################################################################################################
-    for d in xrange(1,days+1):
+    for d in range(1,days+1):
         # Cath room schedules
         generateRowData(d,numCathRooms,'Cath',cathID)
         # EP room schedules
@@ -148,12 +148,12 @@ def getMaxShifts(timePeriod):
     allShifts = timePeriod.bins[3]
     days = timePeriod.numDays
     maximum = 0
-    for d in xrange(0,days):
-        for cath in xrange(numCathRooms):
+    for d in range(0,days):
+        for cath in range(numCathRooms):
             shifts = allShifts[d].rooms[(cathID,cath)]
             if len(shifts) > maximum:
                 maximum = len(shifts)
-        for ep in xrange(numEPRooms):
+        for ep in range(numEPRooms):
             shifts = allShifts[d].rooms[(epID,ep)]
             if len(shifts) > maximum:
                 maximum = len(shifts)
@@ -166,7 +166,7 @@ def saveHoldingBayResults(timePeriod,workbook, params):
     writer = csv.writer(out)
 
     multiple = 60.0/params.resolution
-    times = [i for i in xrange(int(params.HBCloseTime*multiple))]
+    times = [i for i in range(int(params.HBCloseTime*multiple))]
     columns = ["Day"]
     for time in times:
         #hours = math.floor(time)
@@ -178,7 +178,7 @@ def saveHoldingBayResults(timePeriod,workbook, params):
     writer.writerow(columns)
     
     data = []
-    for d in xrange(timePeriod.numDays):
+    for d in range(timePeriod.numDays):
         holdingBays = timePeriod.bins[2]
         day = [holdingBays[(d,time)] for time in times]
         day.insert(0,str(d+1))
@@ -221,7 +221,7 @@ def printOutputStatistics(timePeriod, procedures, params):
     print ("Same weeks: "+str(timePeriod.numSameWeeks))
     print ("Emergencies: "+str(timePeriod.numEmergencies))
     minutes = timePeriod.getProcsByMinuteVolume(procedures, params)
-    for x in xrange(6):
+    for x in range(6):
         minutes[x] = round(minutes[x],2)
     print ("\tBREAKDOWN BY MINUTES")
     print ("\tSame week flex: "+str(minutes[4])+" minutes")
@@ -245,7 +245,7 @@ def printOutputStatistics(timePeriod, procedures, params):
     minutesPlaced = timePeriod.getProcsByMinuteVolume(timePeriod.procsPlacedData, params)
 ##    print ("\tBREAKDOWN BY MINUTES PLACED")
 ##    modifiedMinutes = [0]*6
-##    for x in xrange(6):
+##    for x in range(6):
 ##        minutesPlaced[x] = round(minutesPlaced[x],2)
 ##        modifiedMinutes[x] = 100 if minutes[x]==0 else minutes[x]
 ##    print ("\tSame week flex: "+str(minutesPlaced[4])+" out of "+str(minutes[4])+" minutes placed ("+str(round((minutesPlaced[4]/(modifiedMinutes[4])*100),2))+"%)")
