@@ -1,7 +1,7 @@
 '''
 Adapted from @nicseo code 11/20/14
 
-Last Modified: 10/10/19
+Last Modified: 7/5/2020
 
 @author: cindiewu
 '''
@@ -30,7 +30,7 @@ class Schedule():
         self.binsPerHour = 60.0/minuteRes
         self.fractionPerHour = minuteRes/60.0
         self.minuteRes = minuteRes
-        self.timeSlots = {timeFormattedFromMinutes(m*self.minuteRes):[] for m in xrange(int(self.binsPerHour*24))}
+        self.timeSlots = {timeFormattedFromMinutes(m*self.minuteRes):[] for m in range(int(self.binsPerHour*24))}
 
         self.labStartTime = labStart
         self.labEndTime = labEnd
@@ -125,7 +125,7 @@ class Schedule():
         numBins = int((procDuration[0]*self.binsPerHour) + (procDuration[1]/self.minuteRes))
 
         minutes = minutesFromTimeFormatted(procStart)-self.minuteRes
-        for b in xrange(numBins):
+        for b in range(numBins):
             minutes += self.minuteRes
             currentBin = timeFormattedFromMinutes(minutes)
             if currentBin == (24,0):

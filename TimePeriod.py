@@ -14,13 +14,13 @@ class TimePeriod:
     def __init__(self, params):
         
         CathRooms = {(d,params.cathID,i):Schedule(int(params.resolution),params.labStartTime,params.labEndTime) for i in range(params.numCathRooms) for d in range(params.daysInPeriod)}
-        EPRooms = {(d,params.epID,i):Schedule(int(params.resolution),params.labStartTime,params.labEndTime) for i in xrange(params.numEPRooms) for d in xrange(params.daysInPeriod)}
-        MiddleRooms = {(d,params.middleID,i):Schedule(int(params.resolution),params.labStartTime,params.labEndTime) for i in xrange(params.numMiddleRooms) for d in xrange(params.daysInPeriod)}
-        DayShifts = {d: ShiftSchedule(params.numCathRooms,params.numEPRooms,params.secondShiftStart) for d in xrange(params.daysInPeriod)}
+        EPRooms = {(d,params.epID,i):Schedule(int(params.resolution),params.labStartTime,params.labEndTime) for i in range(params.numEPRooms) for d in range(params.daysInPeriod)}
+        MiddleRooms = {(d,params.middleID,i):Schedule(int(params.resolution),params.labStartTime,params.labEndTime) for i in range(params.numMiddleRooms) for d in range(params.daysInPeriod)}
+        DayShifts = {d: ShiftSchedule(params.numCathRooms,params.numEPRooms,params.secondShiftStart) for d in range(params.daysInPeriod)}
         rooms = dict(CathRooms.items() + EPRooms.items() + MiddleRooms.items())
-        overflow = {d:[] for d in xrange(params.daysInPeriod)}
+        overflow = {d:[] for d in range(params.daysInPeriod)}
         multiple = 60.0/params.resolution
-        holdingBays = {(d,1.0*i):0 for i in xrange(0,int(params.HBCloseTime*multiple)) for d in xrange(params.daysInPeriod)}
+        holdingBays = {(d,1.0*i):0 for i in range(0,int(params.HBCloseTime*multiple)) for d in range(params.daysInPeriod)}
 
         self.bins = [copy.deepcopy(rooms),copy.deepcopy(overflow),copy.deepcopy(holdingBays), copy.deepcopy(DayShifts)]
 
@@ -273,7 +273,7 @@ class TimePeriod:
 
         ###### STEP 0: MODIFY PROCEDURE DATA ACCORDING TO SPECS ######
         # add procedure ID's
-        for i in xrange(len(allProcs)):
+        for i in range(len(allProcs)):
             proc = procedures[i]
             proc.append(i)
 
@@ -540,11 +540,11 @@ class TimePeriod:
         '''
 
         '''  
-        CathRooms = {(d,params.cathID,i):[] for i in xrange(params.numCathRooms) for d in xrange(self.numDays)}
-        EPRooms = {(d,params.epID,i):[] for i in xrange(params.numEPRooms) for d in xrange(self.numDays)}
+        CathRooms = {(d,params.cathID,i):[] for i in range(params.numCathRooms) for d in range(self.numDays)}
+        EPRooms = {(d,params.epID,i):[] for i in range(params.numEPRooms) for d in range(self.numDays)}
         roomsUtil = dict(CathRooms.items() + EPRooms.items())
 
-        for day in xrange(self.numDays):
+        for day in range(self.numDays):
             for c in range(params.numCathRooms):
                 roomMinutes = self.bins[0][(day,params.cathID,c)].getTotalPrimeTimeMinutes()
                 util = roomMinutes / params.totalTimeRoom
@@ -560,7 +560,7 @@ class TimePeriod:
         cathAverage = sum(avgsCath)/self.numDays
         epAverage = sum(avgsEP)/self.numDays
 
-        avgDaysCombined = [[avgDays[(d,params.cathID)],avgDays[(d,params.epID)]] for d in xrange(self.numDays)]
+        avgDaysCombined = [[avgDays[(d,params.cathID)],avgDays[(d,params.epID)]] for d in range(self.numDays)]
         avgWeeks = self.getAverageUtilizationByWeek(avgDaysCombined)
                 
         return (cathAverage,epAverage,avgDaysCombined,avgWeeks,roomsUtil)
@@ -572,12 +572,12 @@ class TimePeriod:
         daysUtilCopy = copy.deepcopy(daysUtil)
         daysAverageUtil = {}
         
-        for d in xrange(self.numDays):
+        for d in range(self.numDays):
             cathDayTotal = 0
             epDayTotal = 0
-            for c in xrange(self.numCathRooms):
+            for c in range(self.numCathRooms):
                 cathDayTotal += daysUtilCopy[(d,params.cathID,c)]
-            for e in xrange(self.numEPRooms):
+            for e in range(self.numEPRooms):
                 epDayTotal += daysUtilCopy[(d,params.epID,e)]
             daysAverageUtil[(d,cathID)] = (cathDayTotal/self.numCathRooms)
             daysAverageUtil[(d,epID)] = (epDayTotal/self.numEPRooms)
@@ -588,14 +588,14 @@ class TimePeriod:
         '''
         '''
         avgDaysCopy = copy.deepcopy(avgDays)
-        weeksUtil = [[avgDaysCopy[i],avgDaysCopy[i+1],avgDaysCopy[i+2],avgDaysCopy[i+3],avgDaysCopy[i+4]] for i in xrange(0,self.numDays-4,5)]
-        weeksAverageUtil = [[] for i in xrange(self.numWeeks)]
+        weeksUtil = [[avgDaysCopy[i],avgDaysCopy[i+1],avgDaysCopy[i+2],avgDaysCopy[i+3],avgDaysCopy[i+4]] for i in range(0,self.numDays-4,5)]
+        weeksAverageUtil = [[] for i in range(self.numWeeks)]
 
-        for w in xrange(self.numWeeks):
+        for w in range(self.numWeeks):
             cathWeekTotal = 0
             epWeekTotal = 0
             week = weeksUtil[w]
-            for d in xrange(5):
+            for d in range(5):
                 cathWeekTotal += week[d][0]
                 epWeekTotal += week[d][1]
             weeksAverageUtil[w].append(cathWeekTotal/5)

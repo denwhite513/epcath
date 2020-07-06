@@ -1,7 +1,7 @@
 '''
 Adapted from @nicseo code 11/20/14
 
-Last Modified: 10/10/19
+Last Modified: 7/5/2020
 
 @author: cindiewu
 '''
@@ -33,16 +33,16 @@ class ShiftSchedule():
     '''
 
     def __init__(self,numCathRooms,numEPRooms,secondShiftStart):
-        cathRooms = {(cathID,room):[] for room in xrange(numCathRooms)}
-        epRooms = {(epID,room):[] for room in xrange(numEPRooms)}
+        cathRooms = {(cathID,room):[] for room in range(numCathRooms)}
+        epRooms = {(epID,room):[] for room in range(numEPRooms)}
         self.rooms = dict(cathRooms.items()+epRooms.items())
         self.numCathRooms = numCathRooms
         self.numEPRooms = numEPRooms
         self.numRooms = {cathID: numCathRooms, epID:numEPRooms}
         self.secondShiftStart = secondShiftStart
         
-        cathStarts = {(cathID,room):labStartTime for room in xrange(numCathRooms)}
-        epStarts = {(epID,room):labStartTime for room in xrange(numEPRooms)}
+        cathStarts = {(cathID,room):labStartTime for room in range(numCathRooms)}
+        epStarts = {(epID,room):labStartTime for room in range(numEPRooms)}
         self.nextShiftStartTimes = dict(cathStarts.items()+epStarts.items())
 
     def findEarliestRoom(self,lab):
@@ -55,13 +55,13 @@ class ShiftSchedule():
         earliestRoom = (None,None)
 
         if lab == cathID:
-            for c in xrange(self.numCathRooms):
+            for c in range(self.numCathRooms):
                 end = self.lastShiftEndTime(cathID,c)
                 if isEarlier(end,earliestTime):
                     earliestTime = end
                     earliestRoom = (cathID,c)
         else:
-            for e in xrange(self.numEPRooms):
+            for e in range(self.numEPRooms):
                 end = self.lastShiftEndTime(epID,e)
                 if isEarlier(end,earliestTime):
                     earliestTime = end
@@ -156,10 +156,10 @@ class ShiftSchedule():
         '''
         openShifts = 0.0
         if lab == cathID:        
-          for c in xrange(self.numCathRooms):
+          for c in range(self.numCathRooms):
             openShifts += self.shiftsLeftInRoom(lab,c)
         elif lab == epID:
-          for e in xrange(self.numEPRooms):
+          for e in range(self.numEPRooms):
             openShifts += self.shiftsLeftInRoom(lab,e)
         return openShifts
     
@@ -173,10 +173,10 @@ class ShiftSchedule():
         '''
         numShifts = (0.0,0.0,0.0)
         if lab == cathID:
-            for c in xrange(self.numCathRooms):
+            for c in range(self.numCathRooms):
                 numShifts = [sum(x) for x in zip(numShifts, self.numShiftsInRoom(cathID,c))]
         elif lab == epID:
-            for e in xrange(self.numEPRooms):
+            for e in range(self.numEPRooms):
                 numShifts = [sum(x) for x in zip(numShifts, self.numShiftsInRoom(epID,e))]
         return numShifts
 
@@ -188,9 +188,9 @@ class ShiftSchedule():
                  and single procedure shifts during that day
         '''
         numShifts = (0.0,0.0,0.0)
-        for c in xrange(self.numCathRooms):
+        for c in range(self.numCathRooms):
             numShifts = [sum(x) for x in zip(numShifts, self.numShiftsInRoom(cathID,c))]
-        for e in xrange(self.numEPRooms):
+        for e in range(self.numEPRooms):
             numShifts = [sum(x) for x in zip(numShifts, self.numShiftsInRoom(epID,e))]
         return numShifts
 
@@ -211,7 +211,7 @@ class ShiftSchedule():
         If all rooms are full, returns 0.
         '''
         maxOpen = 0
-        for r in xrange(self.numRooms[lab]):
+        for r in range(self.numRooms[lab]):
             if self.shiftsLeftInRoom(lab,r) > maxOpen:
                 maxOpen = self.shiftsLeftInRoom(lab,r)
         return maxOpen
@@ -229,12 +229,12 @@ class ShiftSchedule():
         '''
         if lab == cathID:
             if self.shiftsLeftInLab(cathID) > 0:
-                for c in xrange(self.numCathRooms):
+                for c in range(self.numCathRooms):
                     if self.shiftsLeftInRoom(cathID,c) >= ShiftLength:
                         return c
         elif lab == epID:
             if self.shiftsLeftInLab(epID) > 0:
-                for e in xrange(self.numEPRooms):
+                for e in range(self.numEPRooms):
                     if self.shiftsLeftInRoom(epID,e) >= ShiftLength:
                         return e
         return -1
@@ -256,14 +256,14 @@ class ShiftSchedule():
                  after another provider's half day shift would return (0.0,8,0.25,0.5)
                  Returns None if the provider is not scheduled into the day.
         '''
-        for c in xrange(self.numCathRooms):
+        for c in range(self.numCathRooms):
             room = self.rooms[(cathID,c)]
             previousShifts = 0.0
             for shift in room:
                 if shift[0]==providerKey:
                     return (cathID,c,shift[1],previousShifts)
                 previousShifts += shift[1]
-        for e in xrange(self.numEPRooms):
+        for e in range(self.numEPRooms):
             room = self.rooms[(epID,e)]
             previousShifts = 0.0
             for shift in room:

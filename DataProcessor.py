@@ -1,7 +1,7 @@
 '''
 Adapted from @nicseo code 11/20/14
 
-Last Modified: 10/10/19
+Last Modified: 7/5/2020
 
 @author: cindiewu
 '''
@@ -21,7 +21,8 @@ import pandas as pd
 def test():
     #set up
     import os
-    os.chdir("/home/matrix/")
+    #os.chdir("/home/matrix/")
+    os.chdir("/content/test-epcath/")
     resolution = 5.0
     holdingBayWorkbook = "OutputData/holdingBayOccupancy.csv" 
     #run
