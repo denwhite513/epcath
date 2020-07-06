@@ -17,7 +17,7 @@ class TimePeriod:
         EPRooms = {(d,params.epID,i):Schedule(int(params.resolution),params.labStartTime,params.labEndTime) for i in range(params.numEPRooms) for d in range(params.daysInPeriod)}
         MiddleRooms = {(d,params.middleID,i):Schedule(int(params.resolution),params.labStartTime,params.labEndTime) for i in range(params.numMiddleRooms) for d in range(params.daysInPeriod)}
         DayShifts = {d: ShiftSchedule(params.numCathRooms,params.numEPRooms,params.secondShiftStart) for d in range(params.daysInPeriod)}
-        rooms = dict(CathRooms.items() + EPRooms.items() + MiddleRooms.items())
+        rooms = dict(list(CathRooms.items()) + list(EPRooms.items()) + list(MiddleRooms.items()))
         overflow = {d:[] for d in range(params.daysInPeriod)}
         multiple = 60.0/params.resolution
         holdingBays = {(d,1.0*i):0 for i in range(0,int(params.HBCloseTime*multiple)) for d in range(params.daysInPeriod)}
@@ -328,7 +328,7 @@ class TimePeriod:
         if params.ChangeProviderDays:
             #Make all changes for each tuple
             for proc in allProcs:            
-                if proc[params.iProvider] in params.providerChanges.keys():
+                if proc[params.iProvider] in list(params.providerChanges.keys()):
                     procDOW = (proc[params.iDay]-1)%5
                     change = providerChanges[proc[params.iProvider]]
                     fromDay = change[0]
@@ -337,15 +337,15 @@ class TimePeriod:
 
         if params.SwapProviderDays:
             #Make all swap for each tuple
-            providerDict = {k:[[],[]] for k in params.providerSwaps.keys()}            
+            providerDict = {k:[[],[]] for k in list(params.providerSwaps.keys())}            
             for proc in allProcs:
-                if proc[params.iProvider] in params.providerSwaps.keys():
+                if proc[params.iProvider] in list(params.providerSwaps.keys()):
                     procDOW = (proc[params.iDay]-1)%5
                     fromDay = providerSwaps[proc[params.iProvider]][0]
                     toDay = providerSwaps[proc[params.iProvider]][1]
                     if procDOW in (fromDay,toDay):
                         providerDict[proc[params.iProvider]][0].append(proc) if procDOW == fromDay else providerDict[proc[params.iProvider]][1].append(proc)
-            for provider in providerSwaps.keys():
+            for provider in list(providerSwaps.keys()):
                 swap = providerSwaps[provider]
                 fromDay = swap[0]
                 toDay = swap[1]
@@ -542,7 +542,7 @@ class TimePeriod:
         '''  
         CathRooms = {(d,params.cathID,i):[] for i in range(params.numCathRooms) for d in range(self.numDays)}
         EPRooms = {(d,params.epID,i):[] for i in range(params.numEPRooms) for d in range(self.numDays)}
-        roomsUtil = dict(CathRooms.items() + EPRooms.items())
+        roomsUtil = dict(list(CathRooms.items()) + list(EPRooms.items()))
 
         for day in range(self.numDays):
             for c in range(params.numCathRooms):
@@ -555,8 +555,8 @@ class TimePeriod:
                 roomsUtil[(day,epID,e)] = util
 
         avgDays = self.getAverageUtilizationByDay(roomsUtil, params)
-        avgsCath = [avgDays[x] for x in avgDays.keys() if x[1]==params.cathID]
-        avgsEP = [avgDays[x] for x in avgDays.keys() if x[1]==params.epID]
+        avgsCath = [avgDays[x] for x in list(avgDays.keys()) if x[1]==params.cathID]
+        avgsEP = [avgDays[x] for x in list(avgDays.keys()) if x[1]==params.epID]
         cathAverage = sum(avgsCath)/self.numDays
         epAverage = sum(avgsEP)/self.numDays
 
