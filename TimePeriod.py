@@ -1,9 +1,6 @@
 import copy
 import random
 from Schedule import *
-from functools import cmp_to_key   # required for cmp_to_key, from https://stackoverflow.com/questions/53359647/error-sort-in-python-3-x-typeerror-must-use-keyword-argument-for-key-function
-
-
 
 ############################################################################################################################################################################################################ 
 ######################################### BEGIN TIME PERIOD DATA TYPE ###################################################################################################################################### 
@@ -244,19 +241,15 @@ class TimePeriod:
     ######################################## HELPER FUNCTIONS ########################################
     ####################################### (SHIFT BIN PACKING) ######################################
 
-    def mycmp(x, y): return (x > y) - (x < y)
-  
     def sortShifts(self,shifts, params):
         '''
         Sorts shifts in decreasing order by type (1, 0.5, 0.25)
-
+        
         Input: shifts
         Returns: shifts sorted
         '''
-        print("got here")
         shifts = copy.deepcopy(shifts)
-        shifts.sort(key=lambda x,y: cmp_to_key(mycmp(x[params.iShiftType],y[params.iShiftType])),reverse=True)
-        #shifts.sort(lambda x,y: cmp(x[params.iShiftType],y[params.iShiftType]),reverse=True)
+        shifts.sort(lambda x,y: cmp(x[params.iShiftType],y[params.iShiftType]),reverse=True)
         return shifts
     
 
