@@ -1,6 +1,7 @@
 import copy
 import random
 from Schedule import *
+from operator import itemgetter
 
 ############################################################################################################################################################################################################ 
 ######################################### BEGIN TIME PERIOD DATA TYPE ###################################################################################################################################### 
@@ -240,6 +241,8 @@ class TimePeriod:
         
     ######################################## HELPER FUNCTIONS ########################################
     ####################################### (SHIFT BIN PACKING) ######################################
+    #def cmp(x, y): return (x > y) - (x < y)
+
 
     def sortShifts(self,shifts, params):
         '''
@@ -249,7 +252,10 @@ class TimePeriod:
         Returns: shifts sorted
         '''
         shifts = copy.deepcopy(shifts)
-        shifts.sort(lambda x,y: cmp(x[params.iShiftType],y[params.iShiftType]),reverse=True)
+        #print("before" shifts[1:10])
+        sorted(shifts, key=itemgetter(params.iShiftType), reverse=True)
+        #shifts.sort(lambda x,y: cmp(x[params.iShiftType],y[params.iShiftType]),reverse=True)
+        #print("after" shifts[1:10])
         return shifts
     
 
@@ -589,9 +595,11 @@ class TimePeriod:
         '''
         avgDaysCopy = copy.deepcopy(avgDays)
         weeksUtil = [[avgDaysCopy[i],avgDaysCopy[i+1],avgDaysCopy[i+2],avgDaysCopy[i+3],avgDaysCopy[i+4]] for i in range(0,self.numDays-4,5)]
-        weeksAverageUtil = [[] for i in range(self.numWeeks)]
+        weeksAverageUtil = [[] for i in range(int(self.numWeeks))] #Cindie Edit/Check this
+        #weeksAverageUtil = [[] for i in range(self.numWeeks)] #orig
 
-        for w in range(self.numWeeks):
+        #for w in range(self.numWeeks): #orig
+        for w in range(int(self.numWeeks)):
             cathWeekTotal = 0
             epWeekTotal = 0
             week = weeksUtil[w]

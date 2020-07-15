@@ -130,9 +130,11 @@ class Schedule():
             currentBin = timeFormattedFromMinutes(minutes)
             if currentBin == (24,0):
                 break
-            self.timeSlots[currentBin].append(procedure)
+            if currentBin in self.timeSlots: #Cindie Edit/Check this
+                self.timeSlots[currentBin].append(procedure)
 
         # procedure completely during prime time
+        
         if isEarlier(procEnd,self.labEndTime):
             self.primeTimeMinutes += procTime
         else:
