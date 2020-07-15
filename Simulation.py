@@ -162,7 +162,8 @@ def getMaxShifts(timePeriod):
 
 def saveHoldingBayResults(timePeriod,workbook, params):
 
-    out = open(workbook,'wb')
+    #out = open(workbook,'wb') #orig
+    out = open(workbook,'w', encoding='utf-8') #Cindie Edit/Check
     writer = csv.writer(out)
 
     multiple = 60.0/params.resolution
@@ -174,7 +175,8 @@ def saveHoldingBayResults(timePeriod,workbook, params):
         #columns.append(str(int(hours))+":"+str(int(minutes)))
         hours = math.floor(time/multiple)
         minutes = (time - hours*multiple)*params.resolution
-        columns.append(str(int(hours))+":"+str(format(int(minutes), '02d')))
+        columns.append(str(int(hours))+":"+str(format(int(minutes), '02d'))) #orig
+        #columns.append((str(int(hours))+":"+str(format(int(minutes), '02d'))).encode(encoding='UTF-8'))
     writer.writerow(columns)
     
     data = []
